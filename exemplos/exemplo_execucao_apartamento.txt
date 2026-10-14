@@ -1,0 +1,44 @@
+==========================================================
+  RentSmart - Orçamento de Locação | R.M Imóveis
+==========================================================
+
+Qual o tipo de imóvel?
+  [1] Apartamento
+  [2] Casa
+  [3] Estúdio
+> 
+Quantos quartos?
+  [1] 1 quarto
+  [2] 2 quartos
+> 
+Deseja vaga de garagem (+ R$ 300,00/mês)? (s/n): O cliente possui crianças? (s/n): 
+Taxa contratual: R$ 2.000,00 (parcelável em até 5x).
+Em quantas parcelas? (1-5): 
+==============================================================
+        ORÇAMENTO DE LOCAÇÃO - R.M IMÓVEIS (RentSmart)        
+==============================================================
+
+1) ALUGUEL MENSAL
+--------------------------------------------------------------
+  Aluguel-base (Apartamento 2 quarto(s))             R$ 700,00
+  Adicional de 2 quartos                             R$ 200,00
+  Vaga de garagem (1)                                R$ 300,00
+--------------------------------------------------------------
+  Subtotal                                         R$ 1.200,00
+  Desconto de 5% (sem crianças)                      -R$ 60,00
+  ALUGUEL MENSAL FINAL                             R$ 1.140,00
+
+2) TAXA CONTRATUAL (cobrada à parte do aluguel)
+--------------------------------------------------------------
+  Valor total da taxa                              R$ 2.000,00
+  Parcelamento: 5x de R$ 400,00
+
+3) RESUMO DO PRIMEIRO ANO (12 meses)
+--------------------------------------------------------------
+  Aluguel (12 x mensal)                           R$ 13.680,00
+  Taxa contratual                                  R$ 2.000,00
+--------------------------------------------------------------
+  TOTAL PREVISTO NO 1º ANO                        R$ 15.680,00
+==============================================================
+
+Projeção de 12 meses salva em: projecao_12_meses.csv

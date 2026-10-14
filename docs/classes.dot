@@ -1,0 +1,30 @@
+digraph C {
+  rankdir=TB; nodesep=0.35; ranksep=0.55; dpi=200;
+  node [shape=record, fontname="DejaVu Sans", fontsize=10, style=filled, fillcolor="#F8FAFC", color="#334155", penwidth=1.2];
+  edge [fontname="DejaVu Sans", fontsize=9, color="#334155", arrowsize=0.8];
+
+  Imovel [label="{«abstrata»\nImovel|+ quartos : int\l+ vagas : int\l|+ aluguel_base : Decimal «abstract»\l+ valor_garagem() «abstract»\l+ descricao_garagem() «abstract»\l+ adicional_quartos()\l+ percentual_desconto()\l+ aluguel_bruto()\l+ valor_desconto()\l+ aluguel_final()\l+ composicao()\l}", fillcolor="#DBEAFE"];
+  Resid [label="{«abstrata»\nImovelResidencial|ADICIONAL_QUARTOS : dict\lVALOR_VAGA = 300\lMAX_VAGAS = 1\l|+ adicional_quartos()\l+ valor_garagem()\l+ descricao_garagem()\l}", fillcolor="#DBEAFE"];
+  Apto [label="{Apartamento|+ possui_criancas : bool\lbase = 700\l+2 quartos = +200\l|+ percentual_desconto()\l  (5% sem crianças)\l}"];
+  Casa [label="{Casa|base = 900\l+2 quartos = +250\l|(herda tudo de\lImovelResidencial)\l}"];
+  Est [label="{Estudio|base = 1200\lPACOTE_VAGAS = 2\lVALOR_PACOTE = 250\lVAGA_ADICIONAL = 60\l|+ vagas_adicionais()\l+ valor_garagem()\l+ descricao_garagem()\l}"];
+
+  Taxa [label="{TaxaContratual|+ valor = 2000\l+ parcelas : int (1 a 5)\l|+ valor_parcela()\l+ cronograma()\l+ parcela_do_mes(mes)\l}", fillcolor="#FEF9C3"];
+  Orc [label="{Orcamento|+ imovel : Imovel\l+ taxa : TaxaContratual\l|+ projecao() : list\l+ total_aluguel_ano()\l+ total_taxa_ano()\l+ total_primeiro_ano()\l+ resumo() : str\l}", fillcolor="#E9D5FF"];
+  Lin [label="{LinhaProjecao «dataclass»|+ mes, aluguel,\l  parcela_taxa\l|+ total\l}", fillcolor="#E9D5FF"];
+  Exp [label="{ExportadorCSV|+ caminho : str\l|+ exportar(orcamento)\l}", fillcolor="#BBF7D0"];
+  Menu [label="{MenuRentSmart|+ TIPOS : dict\l|+ montar_imovel()\l+ montar_taxa()\l+ montar_orcamento()\l}", fillcolor="#BBF7D0"];
+  Ent [label="{Entrada|(métodos estáticos)\l|+ opcao()\l+ inteiro()\l+ sim_nao()\l}", fillcolor="#BBF7D0"];
+
+  Resid -> Imovel [arrowhead=empty];
+  Est -> Imovel [arrowhead=empty];
+  Apto -> Resid [arrowhead=empty];
+  Casa -> Resid [arrowhead=empty];
+  Orc -> Imovel [dir=both, arrowtail=diamond, arrowhead=none, label=" 1"];
+  Orc -> Taxa [dir=both, arrowtail=diamond, arrowhead=none, label=" 1"];
+  Orc -> Lin [arrowhead=vee, style=dashed, label=" cria 12"];
+  Exp -> Orc [arrowhead=vee, style=dashed, label=" usa"];
+  Menu -> Orc [arrowhead=vee, style=dashed, label=" cria"];
+  Menu -> Ent [arrowhead=vee, style=dashed, label=" usa"];
+  {rank=same; Apto; Casa; Est}
+}

@@ -1,0 +1,54 @@
+digraph G {
+  rankdir=TB; nodesep=0.35; ranksep=0.32; dpi=200;
+  node [fontname="DejaVu Sans", fontsize=11, style=filled, fillcolor="#FFFFFF", color="#334155", penwidth=1.3, margin="0.14,0.07"];
+  edge [fontname="DejaVu Sans", fontsize=10, color="#334155", arrowsize=0.7];
+
+  ini  [label="INÍCIO", shape=ellipse, fillcolor="#D1FAE5"];
+  fim  [label="FIM", shape=ellipse, fillcolor="#FEE2E2"];
+
+  tipo [label="Ler tipo de imóvel\n(1 Apto, 2 Casa, 3 Estúdio)", shape=parallelogram, fillcolor="#DBEAFE"];
+  d_est [label="Estúdio?", shape=diamond, fillcolor="#FEF9C3"];
+
+  q    [label="Ler nº de quartos (1 ou 2)", shape=parallelogram, fillcolor="#DBEAFE"];
+  g    [label="Ler: deseja vaga de garagem?\n(s/n)", shape=parallelogram, fillcolor="#DBEAFE"];
+  d_apt [label="Apartamento?", shape=diamond, fillcolor="#FEF9C3"];
+  cri  [label="Ler: possui crianças? (s/n)", shape=parallelogram, fillcolor="#DBEAFE"];
+
+  e_est [label="Ler: deseja estacionamento? (s/n)", shape=parallelogram, fillcolor="#DBEAFE"];
+  d_est2 [label="Quer\nestacionamento?", shape=diamond, fillcolor="#FEF9C3"];
+  e_qtd [label="Ler total de vagas (2 a 10)", shape=parallelogram, fillcolor="#DBEAFE"];
+
+  par  [label="Ler nº de parcelas da taxa (1 a 5)", shape=parallelogram, fillcolor="#DBEAFE"];
+  obj  [label="Criar objeto Imovel\n(Apartamento / Casa / Estúdio)\n+ objeto TaxaContratual", shape=box, fillcolor="#E9D5FF"];
+
+  base [label="aluguel = aluguel-base do tipo", shape=box];
+  adq  [label="+ adicional de 2 quartos\n(Apto R$ 200 | Casa R$ 250)", shape=box];
+  gar  [label="+ garagem\n(Apto/Casa: R$ 300 | Estúdio: R$ 250 pacote + R$ 60/extra)", shape=box];
+  d_desc [label="Apartamento\nsem crianças?", shape=diamond, fillcolor="#FEF9C3"];
+  desc [label="desconto = 5% do aluguel\n(após adicionais)", shape=box];
+  fin  [label="aluguel final = aluguel - desconto", shape=box, fillcolor="#BBF7D0"];
+
+  taxa [label="Calcular parcelas da taxa (R$ 2.000 ÷ n)\nÚltima parcela ajusta centavos", shape=box];
+  proj [label="PARA mês de 1 a 12:\nlinha = aluguel + parcela da taxa (se mês ≤ n)", shape=box];
+  resumo [label="Exibir resumo detalhado:\naluguel, adicionais, desconto,\ntaxa e parcelamento (separados)", shape=parallelogram, fillcolor="#DBEAFE"];
+  csv  [label="Gerar arquivo CSV\ncom a projeção de 12 meses", shape=parallelogram, fillcolor="#DBEAFE"];
+
+  ini -> tipo -> d_est;
+  d_est -> q [label=" Não"];
+  d_est -> e_est [label=" Sim"];
+  q -> g -> d_apt;
+  d_apt -> cri [label=" Sim"];
+  d_apt -> par [label=" Não"];
+  cri -> par;
+  e_est -> d_est2;
+  d_est2 -> e_qtd [label=" Sim"];
+  d_est2 -> par [label=" Não"];
+  e_qtd -> par;
+  par -> obj -> base -> adq -> gar -> d_desc;
+  d_desc -> desc [label=" Sim"];
+  d_desc -> fin [label=" Não"];
+  desc -> fin;
+  fin -> taxa -> proj -> resumo -> csv -> fim;
+  {rank=same; q; e_est}
+  {rank=same; cri; d_est2}
+}

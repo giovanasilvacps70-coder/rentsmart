@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+projecao_12_meses.csv
+.venv/
+.idea/
+.vscode/

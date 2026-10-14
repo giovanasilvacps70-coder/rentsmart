@@ -1,0 +1,11 @@
+digraph V {
+  rankdir=LR; nodesep=0.4; ranksep=0.5; dpi=200;
+  node [fontname="DejaVu Sans", fontsize=11, style=filled, fillcolor="#FFFFFF", color="#334155", penwidth=1.3];
+  edge [fontname="DejaVu Sans", fontsize=10, color="#334155", arrowsize=0.7];
+  a [label="Exibir pergunta", shape=box];
+  b [label="Ler resposta\n(input)", shape=parallelogram, fillcolor="#DBEAFE"];
+  c [label="Resposta\nválida?", shape=diamond, fillcolor="#FEF9C3"];
+  d [label="Exibir mensagem\nde erro", shape=box, fillcolor="#FEE2E2"];
+  e [label="Retornar valor\nao programa", shape=box, fillcolor="#BBF7D0"];
+  a -> b -> c; c -> e [label=" Sim"]; c -> d [label=" Não"]; d -> b;
+}
