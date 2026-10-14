@@ -14,7 +14,7 @@ Projeto da disciplina *Algorithmic Thinking & Introduction to Object-Oriented Pr
 ## Como executar
 
 ```bash
-git clone <URL-DO-SEU-REPOSITORIO>
+git clone https://github.com/giovanasilvacps70-coder/rentsmart.git
 cd rentsmart
 python main.py          # no Linux/macOS pode ser: python3 main.py
 ```
